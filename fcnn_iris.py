@@ -1,12 +1,12 @@
+import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
 from colorama import Fore
 from keras import Sequential
 from keras.applications.densenet import layers
 from keras.callbacks import EarlyStopping
-import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
-import seaborn as sns
 from sklearn.preprocessing import OneHotEncoder
 
 df = pd.read_csv('./dataset/iris.csv')
