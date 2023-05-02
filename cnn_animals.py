@@ -46,24 +46,24 @@ if not os.path.exists(REFACTORED_DIRECTORY):
 train_batches = ImageDataGenerator().flow_from_directory(
     directory=TRAIN_DIRECTORY,
     classes=TRANSLATION.keys(),
-    batch_size=1,
+    batch_size=32,
 )
 valid_batches = ImageDataGenerator().flow_from_directory(
     directory=VALID_DIRECTORY,
     classes=TRANSLATION.keys(),
-    batch_size=1,
+    batch_size=32,
     shuffle=False,
 )
 test_batches = ImageDataGenerator().flow_from_directory(
     directory=TEST_DIRECTORY,
     classes=TRANSLATION.keys(),
-    batch_size=1,
+    batch_size=32,
     shuffle=False,
 )
 
 model = Sequential(
     [
-        layers.Conv2D(filters=128, kernel_size=3),
+        layers.Conv2D(filters=32, kernel_size=3),
         layers.BatchNormalization(),
         layers.Activation(activation='relu'),
         layers.MaxPooling2D((2, 2)),
@@ -73,12 +73,28 @@ model = Sequential(
         layers.Activation(activation='relu'),
         layers.MaxPooling2D((2, 2)),
 
-        layers.Conv2D(filters=32, kernel_size=3),
+        layers.Conv2D(filters=128, kernel_size=3),
+        layers.BatchNormalization(),
+        layers.Activation(activation='relu'),
+        layers.MaxPooling2D((2, 2)),
+
+        layers.Conv2D(filters=256, kernel_size=3),
+        layers.BatchNormalization(),
+        layers.Activation(activation='relu'),
+        layers.MaxPooling2D((2, 2)),
+
+        layers.Conv2D(filters=512, kernel_size=3),
         layers.BatchNormalization(),
         layers.Activation(activation='relu'),
         layers.MaxPooling2D((2, 2)),
 
         layers.GlobalAveragePooling2D(),
+        layers.Dense(1024, activation='relu'),
+        layers.Dense(512, activation='relu'),
+        layers.Dense(256, activation='relu'),
+        layers.Dense(128, activation='relu'),
+        layers.Dense(64, activation='relu'),
+        layers.Dense(32, activation='relu'),
         layers.Dense(16, activation='relu'),
         layers.Dense(10, activation='softmax'),
     ]
