@@ -1,12 +1,12 @@
-import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as sns
 from colorama import Fore
 from keras import Sequential
 from keras.applications.densenet import layers
 from keras.callbacks import EarlyStopping
+import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
+import seaborn as sns
 from sklearn.preprocessing import OneHotEncoder
 
 df = pd.read_csv('./dataset/iris.csv')
@@ -53,6 +53,7 @@ plt.title('Model accuracy')
 plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
 plt.legend(['Train', 'Valid'], loc='upper left')
+plt.savefig('./out/accuracy_history.png')
 plt.show()
 
 plt.plot(fitted_model.history['loss'])
@@ -61,6 +62,7 @@ plt.title('Model loss')
 plt.ylabel('Loss')
 plt.xlabel('Epoch')
 plt.legend(['Train', 'Valid'], loc='upper left')
+plt.savefig('./out/loss_history.png')
 plt.show()
 
 y_predict = model.predict(x_test)
@@ -73,4 +75,5 @@ ax.xaxis.set_ticklabels(labels)
 ax.yaxis.set_ticklabels(labels)
 plt.xticks(rotation=90)
 plt.yticks(rotation=0)
+plt.savefig('./out/confusion_matrix.png')
 plt.show()

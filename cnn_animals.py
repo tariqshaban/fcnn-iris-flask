@@ -3,14 +3,14 @@ import random
 import shutil
 from glob import glob
 
-import matplotlib.pyplot as plt
-import seaborn as sns
 from colorama import Fore
 from keras import Sequential
 from keras.applications.densenet import layers
 from keras.callbacks import EarlyStopping
+import matplotlib.pyplot as plt
 from keras.preprocessing.image import ImageDataGenerator
 from sklearn.metrics import confusion_matrix
+import seaborn as sns
 
 TRANSLATION = {"cane": "dog", "cavallo": "horse", "elefante": "elephant", "farfalla": "butterfly", "gallina": "chicken",
                "gatto": "cat", "mucca": "cow", "pecora": "sheep", "ragno": "spider", "scoiattolo": "squirrel"}
@@ -46,18 +46,15 @@ if not os.path.exists(REFACTORED_DIRECTORY):
 train_batches = ImageDataGenerator().flow_from_directory(
     directory=TRAIN_DIRECTORY,
     classes=TRANSLATION.keys(),
-    batch_size=32,
 )
 valid_batches = ImageDataGenerator().flow_from_directory(
     directory=VALID_DIRECTORY,
     classes=TRANSLATION.keys(),
-    batch_size=32,
     shuffle=False,
 )
 test_batches = ImageDataGenerator().flow_from_directory(
     directory=TEST_DIRECTORY,
     classes=TRANSLATION.keys(),
-    batch_size=32,
     shuffle=False,
 )
 
@@ -120,6 +117,7 @@ plt.title('Model accuracy')
 plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
 plt.legend(['Train', 'Valid'], loc='upper left')
+plt.savefig('./out/accuracy_history.png')
 plt.show()
 
 plt.plot(fitted_model.history['loss'])
@@ -128,6 +126,7 @@ plt.title('Model loss')
 plt.ylabel('Loss')
 plt.xlabel('Epoch')
 plt.legend(['Train', 'Valid'], loc='upper left')
+plt.savefig('./out/loss_history.png')
 plt.show()
 
 y_predict = model.predict(test_batches)
@@ -140,4 +139,5 @@ ax.xaxis.set_ticklabels(TRANSLATION.values())
 ax.yaxis.set_ticklabels(TRANSLATION.values())
 plt.xticks(rotation=90)
 plt.yticks(rotation=0)
+plt.savefig('./out/confusion_matrix.png')
 plt.show()
