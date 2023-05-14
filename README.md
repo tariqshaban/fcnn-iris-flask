@@ -105,6 +105,23 @@ You will need to submit the following files:
 You should upload all these files to the e-learning; however, the Flask code should be on [Replit](https://replit.com).
 Upload a shareable link of that project to the e-learning.
 
+Rubric
+------------
+The following points will dictate your grading:
+
+| Criterion                                                                     | Weight |
+|-------------------------------------------------------------------------------|--------|
+| CNN model is trained and exported                                             | 1 mark |
+| CNN model returns acceptable loss/accuracy values                             | 1 mark |
+| The end-user can upload an image                                              | 1 mark |
+| The backend can interpret "decode" the uploaded image                         | 1 mark |
+| The model returns a valid prediction                                          | 1 mark |
+| The backend successfully redirects the prediction and displays it to the user | 1 mark |
+| The displayed prediction is in a textual form rather than numerical           | 1 mark |
+| The website's visuals are appealing                                           | 1 mark |
+| The web application is hosted on Replit                                       | 1 mark |
+| The student understands how to construct a neural network                     | 1 mark |
+
 Notes
 ------------
 > **Note**: Do not return the numerical value (1, 2, 3) of the prediction directly to the user; instead, return a
