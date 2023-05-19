@@ -14,6 +14,15 @@ The following datasets have been used (for demonstration purposes):
 > **Note**: The provided code based on these datasets is a mere reference for you; you are required to build and deploy
 > a model based on another dataset (discussed in the **_objectives_** section).
 
+Update (19/5/2023)
+------------
+There is a missing layer in `cnn_animals.py` that might cause an ambiguity on what the input dimension is when loading
+the model; to mitigate this issue, you will have to add this line as the first layer in the neural
+network: `Input(shape=(None, None, 3))`.
+
+As for predicting an already trained model, you will have to expand the dimensionality of the sample image before
+invoking the `predict` method; you can do this by calling `np.expand_dims(your_image, axis=0)`.
+
 Getting Started
 ------------
 Clone the project from GitHub
