@@ -3,14 +3,14 @@ import random
 import shutil
 from glob import glob
 
+import matplotlib.pyplot as plt
+import seaborn as sns
 from colorama import Fore
-from keras import Sequential
+from keras import Sequential, Input
 from keras.applications.densenet import layers
 from keras.callbacks import EarlyStopping
-import matplotlib.pyplot as plt
 from keras.preprocessing.image import ImageDataGenerator
 from sklearn.metrics import confusion_matrix
-import seaborn as sns
 
 TRANSLATION = {"cane": "dog", "cavallo": "horse", "elefante": "elephant", "farfalla": "butterfly", "gallina": "chicken",
                "gatto": "cat", "mucca": "cow", "pecora": "sheep", "ragno": "spider", "scoiattolo": "squirrel"}
@@ -60,6 +60,8 @@ test_batches = ImageDataGenerator().flow_from_directory(
 
 model = Sequential(
     [
+        Input(shape=(None, None, 3)),
+
         layers.Conv2D(filters=32, kernel_size=3),
         layers.BatchNormalization(),
         layers.Activation(activation='relu'),
